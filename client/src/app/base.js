@@ -17,7 +17,20 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
     $scope.isActive = function(viewLocation){
       return $location.path() === viewLocation;
     };
+
+
+       $scope.openNav= function() {
+          console.log('clicked');
+          document.getElementById("myNav").style.display = "block";
+      }
+
+       $scope.closeNav =function() {
+          document.getElementById("myNav").style.display = "none";
+      }
   }
+
+
+
 ]);
 angular.module('base').controller('AdminHeaderCtrl' ,['$scope', 'adminResource',
   function($scope, adminResource){

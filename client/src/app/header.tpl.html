@@ -1,4 +1,27 @@
 <div ng-controller="HeaderCtrl">
+
+
+<div id="myNav" class="details">
+ <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+
+ <div class="container" style="width: 50%; margin: 20px auto;">
+
+ <form method="post" action="/posts">
+  <div class="form-group">
+    <input class="form-control" type="text" name="title" id="exampleTextarea" rows="3" placeholder="say something" ></input>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+</div>
+</div>
+
 <div style="color: black;" ng-if="isAuthenticated()">
 <div class="navbar navbar-default navbar-fixed-top" ng-if="!isAdmin()">
     <div class="container">
@@ -39,6 +62,9 @@
     </form>
     </div>
     <div class="links" >
+        <a href="javascript:void(0)"  ng-click="openNav()">
+        <i class="fa fa-plus fa-lg" > &nbsp;</i>
+        </a>
         <a href="/account">
         <i class="fa fa-compass fa-lg" > &nbsp;</i>
         </a>

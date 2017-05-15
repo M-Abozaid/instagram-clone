@@ -154,6 +154,7 @@ exports = module.exports = function(app, passport) {
 
 
   app.get('/posts', posts.find);
+  app.post('/posts', posts.add);
 
   //******** END OF NEW JSON API ********
 

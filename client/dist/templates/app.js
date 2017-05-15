@@ -1332,6 +1332,29 @@ angular.module("footer.tpl.html", []).run(["$templateCache", function ($template
 angular.module("header.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("header.tpl.html",
     "<div ng-controller=\"HeaderCtrl\">\n" +
+    "\n" +
+    "\n" +
+    "<div id=\"myNav\" class=\"details\">\n" +
+    " <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"closeNav()\">&times;</a>\n" +
+    "\n" +
+    " <div class=\"container\" style=\"width: 50%; margin: 20px auto;\">\n" +
+    "\n" +
+    " <form method=\"post\" action=\"/posts\">\n" +
+    "  <div class=\"form-group\">\n" +
+    "    <input class=\"form-control\" type=\"text\" name=\"title\" id=\"exampleTextarea\" rows=\"3\" placeholder=\"say something\" ></input>\n" +
+    "  </div>\n" +
+    "  <div class=\"form-group\">\n" +
+    "    <label for=\"exampleInputFile\">File input</label>\n" +
+    "    <input type=\"file\" class=\"form-control-file\" id=\"exampleInputFile\" aria-describedby=\"fileHelp\">\n" +
+    "    <small id=\"fileHelp\" class=\"form-text text-muted\">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>\n" +
+    "  </div>\n" +
+    " \n" +
+    "  <button type=\"submit\" class=\"btn btn-primary\">Post</button>\n" +
+    "</form>\n" +
+    "\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div style=\"color: black;\" ng-if=\"isAuthenticated()\">\n" +
     "<div class=\"navbar navbar-default navbar-fixed-top\" ng-if=\"!isAdmin()\">\n" +
     "    <div class=\"container\">\n" +
@@ -1372,6 +1395,9 @@ angular.module("header.tpl.html", []).run(["$templateCache", function ($template
     "    </form>\n" +
     "    </div>\n" +
     "    <div class=\"links\" >\n" +
+    "        <a href=\"javascript:void(0)\"  ng-click=\"openNav()\">\n" +
+    "        <i class=\"fa fa-plus fa-lg\" > &nbsp;</i>\n" +
+    "        </a>\n" +
     "        <a href=\"/account\">\n" +
     "        <i class=\"fa fa-compass fa-lg\" > &nbsp;</i>\n" +
     "        </a>\n" +
