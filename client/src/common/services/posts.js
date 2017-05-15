@@ -10,7 +10,7 @@ angular.module('services.PostsFactory')
         console.log('parts ', parts);
         var Id = parts[4]
         console.log(baseURL);
-        return $resource(baseURL + "posts", null, {
+        return $resource( "posts", null, {
             'update': {
                 method: 'PUT'
             }

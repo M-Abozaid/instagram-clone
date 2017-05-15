@@ -1,6 +1,6 @@
-angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap']);
-angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security',
-  function ($scope, $location, security) {
+angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap','ngFileUpload']);
+angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security','Upload',
+  function ($scope, $location, security,Upload) {
     $scope.isAuthenticated = function(){
       return security.isAuthenticated();
     };
@@ -27,6 +27,28 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
        $scope.closeNav =function() {
           document.getElementById("myNav").style.display = "none";
       }
+
+      // upload later on form submit or something similar 
+    $scope.submit = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
+      }
+    };
+ 
+    // upload on file select or drop 
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'posts',
+            data: {file: file, 'title': $scope.title}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
   }
 
 

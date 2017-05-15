@@ -6,7 +6,9 @@ find: function(req, res, next){
 		});
 	},
 add: function(req, res, next){
-	console.log('posting')
+	if (!req.files) console.log('No files were uploaded.');
+	console.log('posting ',req.headers ,'form ', req.form)
+
 	}
 }
 

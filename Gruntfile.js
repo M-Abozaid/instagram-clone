@@ -57,6 +57,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'client/bower_components/moment/',
             src: ['moment.js'], dest: '<%= distdir %>/vendor/'
+          },
+          {
+            expand: true, cwd: 'client/bower_components/ng-file-upload/',
+            src: ['ng-file-upload.js'], dest: '<%= distdir %>/vendor/'
           }
         ]
       },

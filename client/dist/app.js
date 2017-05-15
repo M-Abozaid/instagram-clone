@@ -1158,7 +1158,7 @@ angular.module('services.PostsFactory')
         console.log('parts ', parts);
         var Id = parts[4]
         console.log(baseURL);
-        return $resource(baseURL + "posts", null, {
+        return $resource( "posts", null, {
             'update': {
                 method: 'PUT'
             }
@@ -3371,9 +3371,9 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
 
 }]);
 
-angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap']);
-angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security',
-  function ($scope, $location, security) {
+angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap','ngFileUpload']);
+angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security','Upload',
+  function ($scope, $location, security,Upload) {
     $scope.isAuthenticated = function(){
       return security.isAuthenticated();
     };
@@ -3400,6 +3400,28 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
        $scope.closeNav =function() {
           document.getElementById("myNav").style.display = "none";
       }
+
+      // upload later on form submit or something similar 
+    $scope.submit = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
+      }
+    };
+ 
+    // upload on file select or drop 
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'posts',
+            data: {file: file, 'title': $scope.title}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
   }
 
 
@@ -5232,17 +5254,19 @@ angular.module("header.tpl.html", []).run(["$templateCache", function ($template
     "\n" +
     " <div class=\"container\" style=\"width: 50%; margin: 20px auto;\">\n" +
     "\n" +
-    " <form method=\"post\" action=\"/posts\">\n" +
+    " <form  name=\"form\">\n" +
     "  <div class=\"form-group\">\n" +
-    "    <input class=\"form-control\" type=\"text\" name=\"title\" id=\"exampleTextarea\" rows=\"3\" placeholder=\"say something\" ></input>\n" +
+    "    <input  class=\"form-control\" type=\"text\" name=\"title\" id=\"exampleTextarea\" ng-model=\"title\" rows=\"3\" placeholder=\"say something\" ></input>\n" +
     "  </div>\n" +
     "  <div class=\"form-group\">\n" +
     "    <label for=\"exampleInputFile\">File input</label>\n" +
-    "    <input type=\"file\" class=\"form-control-file\" id=\"exampleInputFile\" aria-describedby=\"fileHelp\">\n" +
+    "    <input   ngf-select ng-model=\"file\" name=\"file\" ngf-pattern=\"'image/*'\"\n" +
+    "    ngf-accept=\"'image/*'\" ngf-max-size=\"20MB\" ngf-min-height=\"100\" \n" +
+    "    ngf-resize=\"{width: 100, height: 100}\" type=\"file\" class=\"form-control-file\" id=\"exampleInputFile\" aria-describedby=\"fileHelp\">\n" +
     "    <small id=\"fileHelp\" class=\"form-text text-muted\">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>\n" +
     "  </div>\n" +
     " \n" +
-    "  <button type=\"submit\" class=\"btn btn-primary\">Post</button>\n" +
+    "  <button ng-click=\"submit()\" type=\"submit\" class=\"btn btn-primary\">Post</button>\n" +
     "</form>\n" +
     "\n" +
     "</div>\n" +
