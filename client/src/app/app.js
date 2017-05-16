@@ -80,6 +80,8 @@ angular.module('app').controller('AppCtrl', ['$scope', 'i18nNotifications', 'loc
     i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
   });
 
+
+
   PostsFactory.query(
     function(response){
       $scope.posts = response;

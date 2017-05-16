@@ -12,6 +12,20 @@ var adminStatus = require('./service/admin/status');
 var adminCategory = require('./service/admin/category');
 var posts = require('./service/postsRoute.js');
 
+
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }
+})
+
+var upload = multer({ storage: storage });
+
 function useAngular(req, res, next){
 
   res.sendFile(require('path').join(__dirname, './client/dist/index.html'));
@@ -154,7 +168,8 @@ exports = module.exports = function(app, passport) {
 
 
   app.get('/posts', posts.find);
-  app.post('/posts', posts.add);
+  app.post('/posts',upload.single('file'), posts.add);
+  app.get('/posts/:postId', posts.image);
 
   //******** END OF NEW JSON API ********
 

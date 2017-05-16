@@ -1,6 +1,6 @@
 angular.module('base',['ngRoute', 'security', 'services.utility', 'services.accountResource', 'services.adminResource', 'ui.bootstrap','ngFileUpload']);
-angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security','Upload',
-  function ($scope, $location, security,Upload) {
+angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'security','Upload','$http','$templateCache', '$route',
+  function ($scope, $location, security,Upload, $http, $templateCache, $route) {
     $scope.isAuthenticated = function(){
       return security.isAuthenticated();
     };
@@ -19,36 +19,91 @@ angular.module('base').controller('HeaderCtrl', ['$scope', '$location', 'securit
     };
 
 
-       $scope.openNav= function() {
-          console.log('clicked');
+
+       openNav= function() {
+
           document.getElementById("myNav").style.display = "block";
       }
 
-       $scope.closeNav =function() {
+       closeNav =function() {
           document.getElementById("myNav").style.display = "none";
       }
 
+
+
       // upload later on form submit or something similar 
-    $scope.submit = function() {
-      if ($scope.form.file.$valid && $scope.file) {
-        $scope.upload($scope.file);
-      }
+      var jsonData = {"username":$scope.username}
+
+      $scope.submit = function() {
+        if ($scope.form.file.$valid && $scope.file) {
+         var file = $scope.file;
+
+         $http({
+                  url: '/posts',
+                  method: "POST",
+                  headers: { 'Content-Type': undefined },
+                  transformRequest: function (data) {
+                      var formData = new FormData();
+                      formData.append("model", angular.toJson(data.model));
+                      formData.append("file", data.files);
+                      return formData;
+                  },
+                  data: { model: jsonData, files: file }
+              }).then(function (response) {
+                  
+              });
+          closeNav();
+            // var currentPageTemplate = $route.current.templateUrl;
+            // $templateCache.remove(currentPageTemplate);
+            // $route.reload();
+            loction.reload()
+         
+        }
+
+
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+
+            
+        
     };
- 
+
+
     // upload on file select or drop 
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: 'posts',
-            data: {file: file, 'title': $scope.title}
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
+    // $scope.upload = function (file) {
+    //     Upload.upload({
+    //         url: '/posts',
+    //         method: 'POST',
+    //         fields: {
+    //             username: $scope.username
+    //         },
+    //         data: {file: file, 'username': $scope.username},
+    //         title: $scope.title
+    //     }).then(function (resp) {
+    //         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    //     }, function (resp) {
+    //         console.log('Error status: ' + resp.status);
+    //     }, function (evt) {
+    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //     });
+    // };
+
+ 
   }
 
 

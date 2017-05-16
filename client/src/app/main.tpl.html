@@ -1,8 +1,12 @@
 <div class="container login-container" >
 <div class="row" id="signup" style="margin-top: 45px; ">
-    <div class="posts-container" ng-repeat="post in posts">
+    
+    <div class="posts-container" ng-repeat="post in posts | orderBy:'-date'"">
         <div class="imgwraper">
-            <img src="{{post.img}}" alt="">
+
+           <img ng-src="posts/{{post._id}}"  alt="">  
+ 
+        
         </div>
         <div class="cption">
             <h2>{{post.name}}</h2>

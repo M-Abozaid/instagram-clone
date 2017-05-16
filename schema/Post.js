@@ -3,9 +3,9 @@
 
 exports = module.exports = function(app, mongoose) {
   var postSchema = new mongoose.Schema({
-    _id: { type: String },
+    
     name: { type: String, default: '' },
-    img: {type: String},
+    img: { data: Buffer, contentType: String },
     venu: {type: String},
     username: {type: String, required: true},
     userId: {

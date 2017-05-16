@@ -1332,143 +1332,111 @@ angular.module("footer.tpl.html", []).run(["$templateCache", function ($template
 angular.module("header.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("header.tpl.html",
     "<div ng-controller=\"HeaderCtrl\">\n" +
-    "\n" +
-    "\n" +
-    "<div id=\"myNav\" class=\"details\">\n" +
-    " <a href=\"javascript:void(0)\" class=\"closebtn\" ng-click=\"closeNav()\">&times;</a>\n" +
-    "\n" +
-    " <div class=\"container\" style=\"width: 50%; margin: 20px auto;\">\n" +
-    "\n" +
-    " <form  name=\"form\">\n" +
-    "  <div class=\"form-group\">\n" +
-    "    <input  class=\"form-control\" type=\"text\" name=\"title\" id=\"exampleTextarea\" ng-model=\"title\" rows=\"3\" placeholder=\"say something\" ></input>\n" +
-    "  </div>\n" +
-    "  <div class=\"form-group\">\n" +
-    "    <label for=\"exampleInputFile\">File input</label>\n" +
-    "    <input   ngf-select ng-model=\"file\" name=\"file\" ngf-pattern=\"'image/*'\"\n" +
-    "    ngf-accept=\"'image/*'\" ngf-max-size=\"20MB\" ngf-min-height=\"100\" \n" +
-    "    ngf-resize=\"{width: 100, height: 100}\" type=\"file\" class=\"form-control-file\" id=\"exampleInputFile\" aria-describedby=\"fileHelp\">\n" +
-    "    <small id=\"fileHelp\" class=\"form-text text-muted\">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>\n" +
-    "  </div>\n" +
-    " \n" +
-    "  <button ng-click=\"submit()\" type=\"submit\" class=\"btn btn-primary\">Post</button>\n" +
-    "</form>\n" +
-    "\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div style=\"color: black;\" ng-if=\"isAuthenticated()\">\n" +
-    "<div class=\"navbar navbar-default navbar-fixed-top\" ng-if=\"!isAdmin()\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"navbar-header\" style=\" float: left;\">\n" +
-    "            <a href=\"/\" class=\"navbar-brand\" >\n" +
-    "                \n" +
-    "                \n" +
-    "                <img src=\"/img/logo-symbol-64x64.png\" >\n" +
-    "            </a>\n" +
-    "\n" +
-    "           \n" +
-    "\n" +
-    "           <!--  <button class=\"navbar-toggle btn navbar-btn\" ng-init=\"menuCollapsed = true\" ng-click=\"menuCollapsed = !menuCollapsed\">\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "            </button>\n" +
-    "        </div>\n" +
-    "         -->\n" +
-    "      <!--   <div class=\"navbar-collapse collapse\" collapse=\"menuCollapsed\" ng-click=\"menuCollapsed = true\">\n" +
-    "            <ul class=\"nav navbar-nav\">\n" +
-    "                <li ng-if=\"!isAuthenticated()\" ng-class=\"{active: isActive('/')}\"><a href=\"/\">Home</a></li>\n" +
-    "                <li ng-if=\"!isAuthenticated()\" ng-class=\"{active: isActive('/about')}\"><a href=\"/about\">About</a></li>\n" +
-    "                <li ng-if=\"!isAuthenticated()\" ng-class=\"{active: isActive('/signup')}\"><a href=\"/signup\">Sign Up</a></li>\n" +
-    "                <li ng-if=\"!isAuthenticated()\" ng-class=\"{active: isActive('/contact')}\"><a href=\"/contact\">Contact</a></li>\n" +
-    "                <li ng-if=\"isAuthenticated()\" ng-class=\"{active: isActive('/account')}\"><a href=\"/account\">My Account</a></li>\n" +
-    "                <li ng-if=\"isAuthenticated()\" ng-class=\"{active: isActive('/account/settings')}\"><a href=\"/account/settings\">Settings</a></li>\n" +
-    "            </ul>\n" +
-    "            <ul class=\"nav navbar-nav navbar-right\">\n" +
-    "                <li ng-if=\"!isAuthenticated()\"><a href=\"/login\"><i class=\"fa fa-user\"></i> Sign In</a></li>\n" +
-    "                <li ng-if=\"isAuthenticated()\"><a href=\"\" ng-click=\"logout()\"><i class=\"fa fa-user\"></i> Sign Out</a></li>\n" +
-    "            </ul>\n" +
-    "        </div> -->\n" +
-    "    </div>\n" +
-    "    <div class=\"search\">\n" +
-    "        <form class=\"form-inline my-2 my-lg-0\">\n" +
-    "              <input class=\"form-control mr-sm-2\" type=\"text\"  placeholder=\"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#xf002; search\" style=\"font-family:FontAwesome; height: 25px; \" />\n" +
-    "    </form>\n" +
-    "    </div>\n" +
-    "    <div class=\"links\" >\n" +
-    "        <a href=\"javascript:void(0)\"  ng-click=\"openNav()\">\n" +
-    "        <i class=\"fa fa-plus fa-lg\" > &nbsp;</i>\n" +
-    "        </a>\n" +
-    "        <a href=\"/account\">\n" +
-    "        <i class=\"fa fa-compass fa-lg\" > &nbsp;</i>\n" +
-    "        </a>\n" +
-    "        <a href=\"/about\">\n" +
-    "        <i class=\"fa fa-heart-o fa-lg\" > &nbsp;</i>\n" +
-    "        </a> \n" +
-    "        <a href=\"/account/settings\">\n" +
-    "         &nbsp; <i class=\"fa fa-user fa-lg\" ></i>\n" +
-    "        </a> \n" +
-    "    </div>\n" +
-    "     \n" +
-    "\n" +
-    "</div>\n" +
-    "<div class=\"navbar navbar-inverse navbar-fixed-top\" ng-if=\"isAdmin()\" ng-controller=\"AdminHeaderCtrl\">\n" +
-    "    <div class=\"container\">\n" +
-    "        <div class=\"navbar-header\">\n" +
-    "            <a href=\"/admin/\" class=\"navbar-brand-admin\">\n" +
-    "                <img src=\"/img/logo-symbol-64x64.png\" class=\"navbar-logo\">\n" +
-    "                <span class=\"navbar-brand-label\">Angular Drywall</span>\n" +
-    "            </a>\n" +
-    "            <button class=\"navbar-toggle btn navbar-btn\" ng-click=\"toggleAdminMenu()\">\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "                <span class=\"icon-bar\"></span>\n" +
-    "            </button>\n" +
-    "        </div>\n" +
-    "        <div class=\"navbar-collapse collapse\" collapse=\"adminMenuCollapsed\">\n" +
-    "            <ul class=\"nav navbar-nav\">\n" +
-    "                <li class=\"dropdown\" dropdown is-open=\"status.isopen\">\n" +
-    "                    <a href=\"#\" class=\"dropdown-toggle navbar-dropdown-admin\" dropdown-toggle>System&nbsp;<span class=\"caret\"></span></a>\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li class=\"dropdown-header\">Pivoted Settings</li>\n" +
-    "                        <li><a href=\"/admin/statuses\" ng-click=\"closeAdminMenu()\">Statuses</a></li>\n" +
-    "                        <li><a href=\"/admin/categories\" ng-click=\"closeAdminMenu()\">Categories</a></li>\n" +
-    "                        <li class=\"divider\"></li>\n" +
-    "                        <li class=\"dropdown-header\">User Admin</li>\n" +
-    "                        <li><a href=\"/admin/users\" ng-click=\"closeAdminMenu()\">Users</a></li>\n" +
-    "                        <li><a href=\"/admin/accounts\" ng-click=\"closeAdminMenu()\">Accounts</a></li>\n" +
-    "                        <li><a href=\"/admin/administrators\" ng-click=\"closeAdminMenu()\">Administrators</a></li>\n" +
-    "                        <li><a href=\"/admin/admin-groups\" ng-click=\"closeAdminMenu()\">Admin Groups</a></li>\n" +
-    "                    </ul>\n" +
-    "                </li>\n" +
-    "            </ul>\n" +
-    "            <form name=\"form\" class=\"navbar-form navbar-right\">\n" +
-    "                <div class=\"dropdown\" dropdown is-open=\"resultIsOpen\">\n" +
-    "                    <input name=\"search\" type=\"text\" placeholder=\"search\" class=\"form-control\" ng-model=\"query\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"update()\">\n" +
-    "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('noDocsMatched')\">no docs matched</li>\n" +
-    "                        <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Users')\">Users</li>\n" +
-    "                        <li ng-repeat=\"user in result.users\">\n" +
-    "                            <a ng-bind=\"user.username\" ng-href=\"/admin/users/{{user._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
-    "                        </li>\n" +
-    "                        <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Accounts')\">Accounts</li>\n" +
-    "                        <li ng-repeat=\"account in result.accounts\">\n" +
-    "                            <a ng-bind=\"account.name.full\" ng-href=\"/admin/accounts/{{account._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
-    "                        </li>\n" +
-    "                        <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Administrators')\">Administrators</li>\n" +
-    "                        <li ng-repeat=\"admin in result.administrators\">\n" +
-    "                            <a ng-bind=\"admin.name.full\" ng-href=\"/admin/administrators/{{admin._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
+    "    <div id=\"myNav\" class=\"details\" >\n" +
+    "        <a href class=\"closebtn\" onclick=\"closeNav()\">&times;</a>\n" +
+    "        <div class=\"container\" style=\"width: 50%; margin: 20px auto;\">\n" +
+    "            <form  name=\"form\" id=\"form1\" runat=\"server\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input class=\"form-control\" type=\"text\" name=\"title\" id=\"exampleTextarea\" ng-model=\"title\" rows=\"3\" placeholder=\"say something\" >\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <label for=\"exampleInputFile\">File input</label>\n" +
+    "                        <input   ngf-select ng-model=\"file\" name=\"file\" type=\"file\" class=\"form-control-file\" id=\"imgInp\" aria-describedby=\"fileHelp\">\n" +
+    "                        \n" +
+    "                    <div style=\"height: 100px;\">\n" +
+    "                    \n" +
+    "                        <img id=\"blah\" src=\"#\" alt=\"\" style=\"height: 100%;\" />\n" +
+    "                    </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
+    "                <button ng-click=\"submit()\" type=\"submit\" class=\"btn btn-primary\">Post</button>\n" +
     "            </form>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "");
+    "\n" +
+    "    <div style=\"color: black;\" ng-if=\"isAuthenticated()\">\n" +
+    "        <div class=\"navbar navbar-default navbar-fixed-top\" ng-if=\"!isAdmin()\">\n" +
+    "            <div class=\"container\">\n" +
+    "                <div class=\"navbar-header\" style=\" float: left;\">\n" +
+    "                    <a href=\"/\" class=\"navbar-brand\" >\n" +
+    "                        <img src=\"/img/logo-symbol-64x64.png\" >\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "                <div class=\"search\">\n" +
+    "                <form class=\"form-inline my-2 my-lg-0\">\n" +
+    "                        <input class=\"form-control mr-sm-2\" type=\"text\"  placeholder=\"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#xf002; search\" style=\"font-family:FontAwesome; height: 25px; \" />\n" +
+    "                </form>\n" +
+    "                </div>\n" +
+    "                <div class=\"links\" >\n" +
+    "                    <a href onclick=\"openNav()\">\n" +
+    "                    <i class=\"fa fa-plus fa-lg\" > &nbsp;</i>\n" +
+    "                    </a>\n" +
+    "                    <a href=\"/account\">\n" +
+    "                    <i class=\"fa fa-compass fa-lg\" > &nbsp;</i>\n" +
+    "                    </a>\n" +
+    "                    <a href=\"/about\">\n" +
+    "                    <i class=\"fa fa-heart-o fa-lg\" > &nbsp;</i>\n" +
+    "                    </a> \n" +
+    "                    <a href=\"/account/settings\">\n" +
+    "                     &nbsp; <i class=\"fa fa-user fa-lg\" ></i>\n" +
+    "                    </a> \n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"navbar navbar-inverse navbar-fixed-top\" ng-if=\"isAdmin()\" ng-controller=\"AdminHeaderCtrl\">\n" +
+    "                <div class=\"container\">\n" +
+    "                    <div class=\"navbar-header\">\n" +
+    "                        <a href=\"/admin/\" class=\"navbar-brand-admin\">\n" +
+    "                            <img src=\"/img/logo-symbol-64x64.png\" class=\"navbar-logo\">\n" +
+    "                            <span class=\"navbar-brand-label\">Angular Drywall</span>\n" +
+    "                        </a>\n" +
+    "                        <button class=\"navbar-toggle btn navbar-btn\" ng-click=\"toggleAdminMenu()\">\n" +
+    "                            <span class=\"icon-bar\"></span>\n" +
+    "                            <span class=\"icon-bar\"></span>\n" +
+    "                            <span class=\"icon-bar\"></span>\n" +
+    "                        </button>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"navbar-collapse collapse\" collapse=\"adminMenuCollapsed\">\n" +
+    "                        <ul class=\"nav navbar-nav\">\n" +
+    "                            <li class=\"dropdown\" dropdown is-open=\"status.isopen\">\n" +
+    "                                <a href=\"#\" class=\"dropdown-toggle navbar-dropdown-admin\" dropdown-toggle>System&nbsp;<span class=\"caret\"></span></a>\n" +
+    "                                <ul class=\"dropdown-menu\">\n" +
+    "                                    <li class=\"dropdown-header\">Pivoted Settings</li>\n" +
+    "                                    <li><a href=\"/admin/statuses\" ng-click=\"closeAdminMenu()\">Statuses</a></li>\n" +
+    "                                    <li><a href=\"/admin/categories\" ng-click=\"closeAdminMenu()\">Categories</a></li>\n" +
+    "                                    <li class=\"divider\"></li>\n" +
+    "                                    <li class=\"dropdown-header\">User Admin</li>\n" +
+    "                                    <li><a href=\"/admin/users\" ng-click=\"closeAdminMenu()\">Users</a></li>\n" +
+    "                                    <li><a href=\"/admin/accounts\" ng-click=\"closeAdminMenu()\">Accounts</a></li>\n" +
+    "                                    <li><a href=\"/admin/administrators\" ng-click=\"closeAdminMenu()\">Administrators</a></li>\n" +
+    "                                    <li><a href=\"/admin/admin-groups\" ng-click=\"closeAdminMenu()\">Admin Groups</a></li>\n" +
+    "                                </ul>\n" +
+    "                            </li>\n" +
+    "                        </ul>\n" +
+    "                        <form name=\"form\" class=\"navbar-form navbar-right\">\n" +
+    "                            <div class=\"dropdown\" dropdown is-open=\"resultIsOpen\">\n" +
+    "                                <input name=\"search\" type=\"text\" placeholder=\"search\" class=\"form-control\" ng-model=\"query\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"update()\">\n" +
+    "                                <ul class=\"dropdown-menu\">\n" +
+    "                                    <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('noDocsMatched')\">no docs matched</li>\n" +
+    "                                    <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Users')\">Users</li>\n" +
+    "                                    <li ng-repeat=\"user in result.users\">\n" +
+    "                                        <a ng-bind=\"user.username\" ng-href=\"/admin/users/{{user._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
+    "                                    </li>\n" +
+    "                                    <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Accounts')\">Accounts</li>\n" +
+    "                                    <li ng-repeat=\"account in result.accounts\">\n" +
+    "                                        <a ng-bind=\"account.name.full\" ng-href=\"/admin/accounts/{{account._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
+    "                                    </li>\n" +
+    "                                    <li class=\"dropdown-header\" ng-show=\"showDropdownHeader('Administrators')\">Administrators</li>\n" +
+    "                                    <li ng-repeat=\"admin in result.administrators\">\n" +
+    "                                        <a ng-bind=\"admin.name.full\" ng-href=\"/admin/administrators/{{admin._id}}\" ng-click=\"closeAdminMenu()\"></a>\n" +
+    "                                    </li>\n" +
+    "                                </ul>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("login/forgot/login-forgot.tpl.html", []).run(["$templateCache", function ($templateCache) {
@@ -1571,9 +1539,13 @@ angular.module("main.tpl.html", []).run(["$templateCache", function ($templateCa
   $templateCache.put("main.tpl.html",
     "<div class=\"container login-container\" >\n" +
     "<div class=\"row\" id=\"signup\" style=\"margin-top: 45px; \">\n" +
-    "    <div class=\"posts-container\" ng-repeat=\"post in posts\">\n" +
+    "    \n" +
+    "    <div class=\"posts-container\" ng-repeat=\"post in posts | orderBy:'-date'\"\">\n" +
     "        <div class=\"imgwraper\">\n" +
-    "            <img src=\"{{post.img}}\" alt=\"\">\n" +
+    "\n" +
+    "           <img ng-src=\"posts/{{post._id}}\"  alt=\"\">  \n" +
+    " \n" +
+    "        \n" +
     "        </div>\n" +
     "        <div class=\"cption\">\n" +
     "            <h2>{{post.name}}</h2>\n" +

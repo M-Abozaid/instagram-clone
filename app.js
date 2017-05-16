@@ -13,7 +13,6 @@ var config = require('./config'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
     csrf = require('csurf');
-
 //create express app
 var app = express();
 
@@ -56,6 +55,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(csrf({ cookie: { signed: true } }));
+
+
 helmet(app);
 
 //response locals

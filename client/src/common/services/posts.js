@@ -1,5 +1,6 @@
 'use strict';
 // alert('inside service out')
+
 console.log('inside service out')
 angular.module('services.PostsFactory', ['ngResource'])
 angular.module('services.PostsFactory')
